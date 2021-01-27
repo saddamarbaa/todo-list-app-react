@@ -1,0 +1,13 @@
+.todo {
+  border: 1px solid red;
+  padding: 12px;
+  margin: 10px;
+  width: 70%;
+  margin: 15px auto;
+}
+
+input,
+button {
+  padding: 12px;
+  margin: 2px;
+}
