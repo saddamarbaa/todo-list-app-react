@@ -13,7 +13,7 @@ function App() {
   const [input, setInput] = useState("");
 
   const handleSubmit = (e) => {
-    // don refresh the webside on click
+    // don refresh the webside on click.
     e.preventDefault();
     // console.log(e);
 
