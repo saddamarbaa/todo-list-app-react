@@ -1,25 +1,28 @@
 import React, { useState } from "react";
-
 import Todo from "./Todo";
-
 import "./App.css";
 
-function App() {
+// App component(parent component)
+
+const App = () => {
   // we need a list of todo's
   // useState
-
   const [todos, setTodos] = useState([]);
-
   const [input, setInput] = useState("");
 
-  const handleSubmit = (e) => {
+  const addTodo = (e) => {
     // don refresh the webside on click.
     e.preventDefault();
     // console.log(e);
+    // console.log("BOOM > ", input);
 
+    // add Whatever in the input filed to the todos array
     setTodos([...todos, input]);
+
     // clear the input filed
     setInput("");
+
+    // console.log([...todos, input]);
   };
 
   const name = "saddam";
@@ -35,7 +38,7 @@ function App() {
         />
 
         {/* make the button disabled if the input is Empty */}
-        <button disabled={!input} type="submit" onClick={handleSubmit}>
+        <button disabled={!input} type="submit" onClick={addTodo}>
           Add Todo
         </button>
       </form>
@@ -45,6 +48,6 @@ function App() {
       ))}
     </div>
   );
-}
+};
 
 export default App;
