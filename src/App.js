@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Todo from "./Todo";
+import Todo from "./components/Todo";
 import "./App.css";
 
 // App component(parent component)
@@ -11,7 +11,7 @@ const App = () => {
   const [input, setInput] = useState("");
 
   const addTodo = (e) => {
-    // don refresh the webside on click.
+    // dont refresh the webside on click.
     e.preventDefault();
     // console.log(e);
     // console.log("BOOM > ", input);

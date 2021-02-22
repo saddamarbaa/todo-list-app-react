@@ -1,6 +1,5 @@
 import React from "react";
 import "./Todo.css";
-import "./App.css";
 
 // Todo component(child component)
 
