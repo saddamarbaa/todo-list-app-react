@@ -2,8 +2,19 @@ import React, { useState, useEffect } from "react";
 import Todo from "./components/Todo";
 import db from "./firebase";
 import "./App.css";
+import { Button, Typography } from "@material-ui/core";
+import AddIcon from "@material-ui/icons/Add";
+import { makeStyles } from "@material-ui/core/styles";
+import TextField from "@material-ui/core/TextField";
+
+const useStyles = makeStyles((theme) => ({
+  button: {
+    margin: theme.spacing(1),
+  },
+}));
 
 const App = () => {
+  const classes = useStyles();
   // we need a list of todo's
   // useState(short time memory)
   const [todos, setTodos] = useState([]);
@@ -55,28 +66,46 @@ const App = () => {
 
   return (
     <div className="App">
-      <h1>Sadam's Todo List</h1>
-      <form>
-        <input
-          className="input"
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-          type="text"
-        />
+      <div className="app-container">
+        <form className={classes.root} noValidate autoComplete="off"></form>
+        <Typography variant="h4" gutterBottom>
+          Sadam's Todo List
+        </Typography>
+        <form className={classes.root} noValidate autoComplete="off">
+          <TextField
+            id="outlined-basic"
+            label=""
+            variant="outlined"
+            className="input"
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            type="text"
+          />
 
-        {/* make the button disabled if the input is Empty */}
-        <button
-          className="add"
-          disabled={!input}
-          type="submit"
-          onClick={addTodo}
-        >
-          Add Todo
-        </button>
-      </form>
-      {todos.map((todo, index) => (
-        <Todo title={todo} key={index} index={index} deleteTodo={deleteTodo} />
-      ))}
+          {/* make the button disabled if the input is Empty */}
+          <Button
+            size="large"
+            variant="contained"
+            color="primary"
+            disabled={!input}
+            type="submit"
+            onClick={addTodo}
+            className={classes.button}
+            startIcon={<AddIcon />}
+          >
+            ADD
+          </Button>
+        </form>
+
+        {todos.map((todo, index) => (
+          <Todo
+            title={todo}
+            key={index}
+            index={index}
+            deleteTodo={deleteTodo}
+          />
+        ))}
+      </div>
     </div>
   );
 };
