@@ -1,7 +1,11 @@
 ==> Todo List App built with ReactJs in this project I learned reacts basis, Component, Props, JSX, Virtual DOM, Styling in ReactJS, Hooks, Firebase…
+
 Firebase database (Real-time database)
+
 Hosted online (on free-base)
+
 Material-UI for the design
+
 Used React (React Hooks)
 
 # todo list diagram
