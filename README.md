@@ -9,13 +9,12 @@ Material-UI for the design
 
 Used React (React Hooks)
 
-# todo list diagram
-https://app.diagrams.net/#G1vM_2H7NeDm5dYiDOh-RnohtE7uYzhZXo
 
-
-#### Live Demo: https://todo-app-8aa5c.web.app/
+## Live Demo: https://todo-app-8aa5c.web.app/
 
 ![image](https://user-images.githubusercontent.com/51326421/109865999-57ceab00-7c97-11eb-84f0-491f8739c20f.png)
+
+## todo list diagram : https://app.diagrams.net/#G1vM_2H7NeDm5dYiDOh-RnohtE7uYzhZXo
 
 # Getting Started with Create React App
 
