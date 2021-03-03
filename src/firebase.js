@@ -12,3 +12,8 @@ const firebaseApp = firebase.initializeApp({
 const db = firebaseApp.firestore();
 
 export default db;
+
+// https://todo-app-8aa5c.web.app/
+// https://todo-app-8aa5c.web.app
+
+// https://todo-app-8aa5c.web.app

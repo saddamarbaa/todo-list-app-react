@@ -1,10 +1,7 @@
 body {
-  /* background-image: linear-gradient(120deg, #663f3f, #ec4646, #bbf1fa); */
-  /* color: white; */
-  /* background-image: linear-gradient(120deg, #663f3f, #bbf1fa); */
   font-family: "Courier New", Courier, monospace;
   min-height: 100vh;
-  background-image: linear-gradient(120deg, #b9b8b8, #bbf1fa);
+  background-image: linear-gradient(120deg, #f3e88f, #f3e88f, #f3e88f);
 }
 
 .App {
@@ -16,7 +13,5 @@ body {
 }
 
 .app-container {
-  background: cornflowerblue;
-
-  padding: 10px 20px;
+  margin-top: 10px;
 }

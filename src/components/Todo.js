@@ -1,14 +1,10 @@
 import { Button, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import DeleteIcon from "@material-ui/icons/Delete";
+import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
 import React from "react";
 import "./Todo.css";
 
-const useStyles = makeStyles((theme) => ({
-  button: {
-    // margin: theme.spacing(1),
-  },
-}));
+const useStyles = makeStyles((theme) => ({}));
 
 const Todo = ({ title, index, deleteTodo }) => {
   const classes = useStyles();
@@ -21,8 +17,8 @@ const Todo = ({ title, index, deleteTodo }) => {
         size="large"
         variant="contained"
         color="secondary"
-        className={(classes.button, "k")}
-        startIcon={<DeleteIcon />}
+        className={classes.button}
+        startIcon={<DeleteForeverIcon />}
         onClick={deleteTodo.bind(this, index)}
       >
         DELETE

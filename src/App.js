@@ -1,11 +1,19 @@
 import React, { useState, useEffect } from "react";
 import Todo from "./components/Todo";
+import firebase from "firebase";
 import db from "./firebase";
 import "./App.css";
-import { Button, Typography } from "@material-ui/core";
+import {
+  Button,
+  Container,
+  CssBaseline,
+  Typography,
+  makeStyles,
+  TextField,
+} from "@material-ui/core";
+
 import AddIcon from "@material-ui/icons/Add";
-import { makeStyles } from "@material-ui/core/styles";
-import TextField from "@material-ui/core/TextField";
+import { v4 as uuidv4 } from "uuid";
 
 const useStyles = makeStyles((theme) => ({
   button: {
@@ -16,24 +24,26 @@ const useStyles = makeStyles((theme) => ({
 const App = () => {
   const classes = useStyles();
   // we need a list of todo's
+
   // useState(short time memory)
   const [todos, setTodos] = useState([]);
   const [input, setInput] = useState("");
 
+  // the goal here is that when the app load, we need to listen to the database and fetch
+  // new todos as they get added/deleted
   // useEffect(function, depencies)
   // useEffect HOOK mean is that run this peice of code only once
   // when the componet loaded and dont run again
   useEffect(() => {
-    db.collection("todos").onSnapshot((snapshot) => {
-      // array of object
-      // const resultBeenReturned = snapshot.docs.map((doc) => doc.data().title);
-      // console.log(resultBeenReturned);
-      setTodos(
-        snapshot.docs.map((doc) => {
-          return doc.data().title;
-        })
-      );
-    });
+    // this code here Run ....... first when the app.js is loaded
+    db.collection("todos")
+      .orderBy("timestamp", "desc")
+      .onSnapshot((snapshot) => {
+        // console.log(snapshot.docs.map((doc) => doc.data()));
+        // console.log(snapshot.docs.map((doc) => doc.id));
+
+        setTodos(snapshot.docs.map((doc) => doc.data().todo));
+      });
   }, []);
 
   const addTodo = (e) => {
@@ -47,7 +57,9 @@ const App = () => {
 
     // Now let add to the firebase Database
     db.collection("todos").add({
-      title: input,
+      todo: input,
+      // set added time to firebase server time
+      timestamp: firebase.firestore.FieldValue.serverTimestamp(),
     });
 
     // clear up the input filed  after clicking add todo button
@@ -65,48 +77,59 @@ const App = () => {
   };
 
   return (
-    <div className="App">
-      <div className="app-container">
-        <form className={classes.root} noValidate autoComplete="off"></form>
-        <Typography variant="h4" gutterBottom>
-          Sadam's Todo List
+    <React.Fragment>
+      <CssBaseline />
+      <Container maxWidth="sm">
+        <Typography
+          component="div"
+          style={{
+            backgroundColor: "rgb(252, 247, 207)",
+            height: "100vh",
+            borderRadius: "20px",
+          }}
+        >
+          <div className="App">
+            <div className="app-container">
+              <Typography variant="h4" gutterBottom className="ok">
+                Sadam's Todo List
+              </Typography>
+
+              <form className={classes.root} noValidate autoComplete="off">
+                <TextField
+                  variant="outlined"
+                  className="input"
+                  value={input}
+                  onChange={(e) => setInput(e.target.value)}
+                  type="text"
+                />
+
+                <Button
+                  size="large"
+                  variant="contained"
+                  color="primary"
+                  disabled={!input}
+                  type="submit"
+                  onClick={addTodo}
+                  className={classes.button}
+                  startIcon={<AddIcon />}
+                >
+                  ADD
+                </Button>
+              </form>
+
+              {todos.map((todo, index) => (
+                <Todo
+                  title={todo}
+                  key={uuidv4()}
+                  index={index}
+                  deleteTodo={deleteTodo}
+                />
+              ))}
+            </div>
+          </div>
         </Typography>
-        <form className={classes.root} noValidate autoComplete="off">
-          <TextField
-            id="outlined-basic"
-            label=""
-            variant="outlined"
-            className="input"
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            type="text"
-          />
-
-          {/* make the button disabled if the input is Empty */}
-          <Button
-            size="large"
-            variant="contained"
-            color="primary"
-            disabled={!input}
-            type="submit"
-            onClick={addTodo}
-            className={classes.button}
-            startIcon={<AddIcon />}
-          >
-            ADD
-          </Button>
-        </form>
-
-        {todos.map((todo, index) => (
-          <Todo
-            title={todo}
-            key={index}
-            index={index}
-            deleteTodo={deleteTodo}
-          />
-        ))}
-      </div>
-    </div>
+      </Container>
+    </React.Fragment>
   );
 };
 
